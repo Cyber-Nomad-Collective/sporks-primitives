@@ -1,0 +1,123 @@
+// Security primitives — authentication, authorization, and security policy type definitions.
+//
+// Describes security policies, vulnerability scanning, secret management,
+// and compliance patterns.
+
+// ── Types ───────────────────────────────────────────────
+
+type SecurityPolicy {
+    name: #Symbol,
+    policy_type: #Symbol,
+    enforcement: #Symbol,
+    scope: #Symbol,
+}
+
+type Vulnerability {
+    id: #Symbol,
+    severity: #Symbol,
+    package: #Symbol,
+    fixed_version: #Symbol,
+}
+
+type Secret {
+    name: #Symbol,
+    secret_type: #Symbol,
+    source: #Symbol,
+    rotation_days: #Symbol,
+}
+
+type ComplianceRule {
+    name: #Symbol,
+    standard: #Symbol,
+    control: #Symbol,
+    status: #Symbol,
+}
+
+type AuditLog {
+    event: #Symbol,
+    principal: #Symbol,
+    resource: #Symbol,
+    outcome: #Symbol,
+}
+
+type EncryptionConfig {
+    algorithm: #Symbol,
+    key_size: #Symbol,
+    mode: #Symbol,
+    provider: #Symbol,
+}
+
+// ── Patterns ────────────────────────────────────────────
+
+pattern critical_vulnerability {
+    Vulnerability
+    and (severity == "critical")
+}
+
+pattern high_vulnerability {
+    Vulnerability
+    and (severity == "high")
+}
+
+pattern rotated_secret {
+    Secret
+    containing $rotation_days: #Symbol
+}
+
+pattern soc2_rule {
+    ComplianceRule
+    and (standard == "soc2")
+}
+
+pattern denied_audit {
+    AuditLog
+    and (outcome == "denied")
+}
+
+pattern aes_encryption {
+    EncryptionConfig
+    and (algorithm == "aes")
+}
+
+pattern blocking_policy {
+    SecurityPolicy
+    and (enforcement == "block")
+}
+
+// ── Transforms ──────────────────────────────────────────
+
+transform change_policy_enforcement(policy_name: #Symbol, new_mode: #Symbol) {
+    for SecurityPolicy {
+        match name == $policy_name;
+        rewrite {
+            enforcement: $new_mode,
+        }
+    }
+}
+
+transform fix_vulnerability(vuln_id: #Symbol, new_version: #Symbol) {
+    for Vulnerability {
+        match id == $vuln_id;
+        rewrite {
+            fixed_version: $new_version,
+        }
+    }
+}
+
+transform rotate_secret(secret_name: #Symbol, new_days: #Symbol) {
+    for Secret {
+        match name == $secret_name;
+        rewrite {
+            rotation_days: $new_days,
+        }
+    }
+}
+
+transform update_compliance_status(rule_name: #Symbol, new_status: #Symbol) {
+    for ComplianceRule {
+        match name == $rule_name;
+        rewrite {
+            status: $new_status,
+        }
+    }
+}

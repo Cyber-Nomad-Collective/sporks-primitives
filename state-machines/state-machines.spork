@@ -1,0 +1,141 @@
+// State Machines — primitives for states, transitions, events, guards, and actions
+
+type StateMachine {
+    machine_id: #Symbol,
+    name: #Symbol,
+    initial_state: #Symbol,
+    current_state: #Symbol,
+    context: #Symbol,
+    version: #Symbol,
+}
+
+type State {
+    state_id: #Symbol,
+    name: #Symbol,
+    machine_id: #Symbol,
+    parent: #Symbol,
+    type: #Symbol,
+    metadata: #Symbol,
+}
+
+type Transition {
+    transition_id: #Symbol,
+    from_state: #Symbol,
+    to_state: #Symbol,
+    event: #Symbol,
+    guard: #Symbol,
+    priority: #Symbol,
+}
+
+type Event {
+    event_id: #Symbol,
+    name: #Symbol,
+    payload: #Symbol,
+    timestamp: #Symbol,
+    source: #Symbol,
+}
+
+type Guard {
+    guard_id: #Symbol,
+    name: #Symbol,
+    expression: #Symbol,
+    fallback: #Symbol,
+    description: #Symbol,
+}
+
+type Action {
+    action_id: #Symbol,
+    name: #Symbol,
+    handler: #Symbol,
+    params: #Symbol,
+    async: #Symbol,
+}
+
+type EntryAction {
+    state_id: #Symbol,
+    action_id: #Symbol,
+    order: #Symbol,
+    condition: #Symbol,
+}
+
+type ExitAction {
+    state_id: #Symbol,
+    action_id: #Symbol,
+    order: #Symbol,
+    condition: #Symbol,
+}
+
+type FinalState {
+    state_id: #Symbol,
+    machine_id: #Symbol,
+    result: #Symbol,
+    is_terminal: #Symbol,
+}
+
+pattern valid_transition {
+    Transition
+    and (from_state != "null")
+    and (to_state != "null")
+    containing $event: #Symbol
+}
+
+pattern guarded_transition {
+    Transition
+    and (guard != "null")
+    containing $from_state: #Symbol
+}
+
+pattern entry_action {
+    EntryAction
+    and (order >= "0")
+    containing $state_id: #Symbol
+}
+
+pattern exit_action {
+    ExitAction
+    and (order >= "0")
+    containing $state_id: #Symbol
+}
+
+pattern final_state {
+    FinalState
+    and (is_terminal == "true")
+    containing $machine_id: #Symbol
+}
+
+transform add_state(machine: #Symbol, state_name: #Symbol) {
+    for State {
+        match machine_id == $machine;
+        rewrite {
+            name: $state_name,
+        }
+    }
+}
+
+transform add_transition(from: #Symbol, to: #Symbol, event: #Symbol) {
+    for Transition {
+        match from_state == $from;
+        rewrite {
+            to_state: $to,
+            event: $event,
+        }
+    }
+}
+
+transform add_guard(transition: #Symbol, guard_name: #Symbol) {
+    for Guard {
+        match guard_id == $transition;
+        rewrite {
+            name: $guard_name,
+        }
+    }
+}
+
+transform change_initial_state(machine: #Symbol, new_initial: #Symbol) {
+    for StateMachine {
+        match machine_id == $machine;
+        rewrite {
+            initial_state: $new_initial,
+        }
+    }
+}

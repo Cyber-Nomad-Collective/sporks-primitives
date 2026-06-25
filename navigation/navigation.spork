@@ -1,0 +1,80 @@
+// Navigation primitives — navigation link and flow definitions.
+
+type Link {
+    name: #Symbol,
+    target: #Symbol,
+    link_type: #Symbol,
+}
+
+type Flow {
+    name: #Symbol,
+    start: #Symbol,
+    completion: #Symbol,
+}
+
+type Route {
+    path: #Symbol,
+    component: #Symbol,
+    name: #Symbol,
+}
+
+type FlowStep {
+    endpoint: #Symbol,
+    transition: #Symbol,
+}
+
+pattern external_link {
+    Link
+    and (link_type == "external")
+}
+
+pattern push_link {
+    Link
+    and (link_type == "push")
+}
+
+pattern named_route {
+    Route
+    containing $component: #Symbol
+}
+
+pattern nested_flow {
+    Flow
+    containing $start: #Symbol
+}
+
+transform rename_link(old: #Symbol, new: #Symbol) {
+    for Link {
+        match name == $old;
+        rewrite {
+            name: $new,
+        }
+    }
+}
+
+transform change_link_target(link_name: #Symbol, new_target: #Symbol) {
+    for Link {
+        match name == $link_name;
+        rewrite {
+            target: $new_target,
+        }
+    }
+}
+
+transform change_route_path(route_name: #Symbol, new_path: #Symbol) {
+    for Route {
+        match name == $route_name;
+        rewrite {
+            path: $new_path,
+        }
+    }
+}
+
+transform set_flow_completion(flow_name: #Symbol, new_completion: #Symbol) {
+    for Flow {
+        match name == $flow_name;
+        rewrite {
+            completion: $new_completion,
+        }
+    }
+}

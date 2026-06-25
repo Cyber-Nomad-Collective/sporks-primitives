@@ -1,0 +1,84 @@
+// Reactive primitives — reactive programming type definitions.
+
+type Signal {
+    name: #Symbol,
+    signal_type: #Symbol,
+    initial_value: #Symbol,
+}
+
+type Computed {
+    name: #Symbol,
+    cached: #Symbol,
+}
+
+type Effect {
+    name: #Symbol,
+    schedule: #Symbol,
+}
+
+type Stream {
+    name: #Symbol,
+    source: #Symbol,
+    buffer_size: #Symbol,
+}
+
+pattern cached_computed {
+    Computed
+    and (cached == "true")
+}
+
+pattern lazy_computed {
+    Computed
+    and (cached == "false")
+}
+
+pattern animation_frame_effect {
+    Effect
+    and (schedule == "animation_frame")
+}
+
+pattern buffered_stream {
+    Stream
+    and (buffer_size == "buffered")
+}
+
+pattern signal_stream {
+    Stream
+    and (source == "signal")
+}
+
+transform rename_signal(old: #Symbol, new: #Symbol) {
+    for Signal {
+        match name == $old;
+        rewrite {
+            name: $new,
+        }
+    }
+}
+
+transform set_signal_initial(signal_name: #Symbol, new_value: #Symbol) {
+    for Signal {
+        match name == $signal_name;
+        rewrite {
+            initial_value: $new_value,
+        }
+    }
+}
+
+transform change_effect_schedule(effect_name: #Symbol, new_schedule: #Symbol) {
+    for Effect {
+        match name == $effect_name;
+        rewrite {
+            schedule: $new_schedule,
+        }
+    }
+}
+
+transform resize_stream_buffer(stream_name: #Symbol, new_size: #Symbol) {
+    for Stream {
+        match name == $stream_name;
+        rewrite {
+            buffer_size: $new_size,
+        }
+    }
+}

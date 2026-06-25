@@ -1,0 +1,125 @@
+// Parsers primitives — grammar, AST, and parser type definitions.
+//
+// Describes tree-sitter grammar integration, AST node manipulation,
+// and parse/emit rule patterns for language providers.
+
+// ── Types ───────────────────────────────────────────────
+
+type Grammar {
+    name: #Symbol,
+    language: #Symbol,
+    version: #Symbol,
+    node_count: #Symbol,
+}
+
+type ASTNode {
+    kind: #Symbol,
+    text: #Symbol,
+    start_byte: #Symbol,
+    end_byte: #Symbol,
+    children: #Symbol,
+}
+
+type ParseRule {
+    name: #Symbol,
+    node_kind: #Symbol,
+    target_kind: #Symbol,
+    provider: #Symbol,
+}
+
+type EmitRule {
+    name: #Symbol,
+    source_kind: #Symbol,
+    target_format: #Symbol,
+    provider: #Symbol,
+}
+
+type SyntaxTree {
+    root: #Symbol,
+    language: #Symbol,
+    error_count: #Symbol,
+}
+
+type Token {
+    kind: #Symbol,
+    text: #Symbol,
+    line: #Symbol,
+    column: #Symbol,
+}
+
+type Visitor {
+    name: #Symbol,
+    enter_kind: #Symbol,
+    leave_kind: #Symbol,
+}
+
+// ── Patterns ────────────────────────────────────────────
+
+pattern tree_sitter_grammar {
+    Grammar
+    containing $node_count: #Symbol
+}
+
+pattern parse_rule_for_function {
+    ParseRule
+    and (node_kind == "function_item")
+}
+
+pattern emit_rule_for_type {
+    EmitRule
+    and (source_kind == "TypeDefinition")
+}
+
+pattern error_free_tree {
+    SyntaxTree
+    and (error_count == "0")
+}
+
+pattern identifier_token {
+    Token
+    and (kind == "identifier")
+}
+
+pattern visitor_enter {
+    Visitor
+    containing $enter_kind: #Symbol
+}
+
+// ── Transforms ──────────────────────────────────────────
+
+transform rename_grammar(old: #Symbol, new: #Symbol) {
+    for Grammar {
+        match name == $old;
+        rewrite {
+            name: $new,
+        }
+    }
+}
+
+transform change_parse_target(rule_name: #Symbol, new_target: #Symbol) {
+    for ParseRule {
+        match name == $rule_name;
+        rewrite {
+            target_kind: $new_target,
+        }
+    }
+}
+
+transform add_emit_rule(rule_name: #Symbol, source: #Symbol, format: #Symbol) {
+    for EmitRule {
+        match name == $rule_name;
+        rewrite {
+            source_kind: $source,
+            target_format: $format,
+        }
+    }
+}
+
+transform update_visitor_kind(visitor_name: #Symbol, new_kind: #Symbol) {
+    for Visitor {
+        match name == $visitor_name;
+        rewrite {
+            enter_kind: $new_kind,
+        }
+    }
+}

@@ -1,0 +1,66 @@
+// Filesystem primitives — declarative directory and file system structure definitions.
+
+type FSEntry {
+    name: #Symbol,
+    entry_type: #Symbol,
+    path: #Symbol,
+}
+
+type FileDef {
+    name: #Symbol,
+    template: #Symbol,
+    encoding: #Symbol,
+}
+
+type DirectoryDef {
+    name: #Symbol,
+    path: #Symbol,
+    merge_strategy: #Symbol,
+}
+
+type FilesystemTree {
+    root: #Symbol,
+    description: #Symbol,
+}
+
+pattern directory_entry {
+    FSEntry
+    and (entry_type == "directory")
+}
+
+pattern file_entry {
+    FSEntry
+    and (entry_type == "file")
+}
+
+pattern templated_file {
+    FileDef
+    containing $template: #Symbol
+}
+
+transform rename_entry(old: #Symbol, new: #Symbol) {
+    for FSEntry {
+        match name == $old;
+        rewrite {
+            name: $new,
+        }
+    }
+}
+
+transform change_merge_strategy(dir_name: #Symbol, new_strategy: #Symbol) {
+    for DirectoryDef {
+        match name == $dir_name;
+        rewrite {
+            merge_strategy: $new_strategy,
+        }
+    }
+}
+
+transform change_encoding(file_name: #Symbol, new_encoding: #Symbol) {
+    for FileDef {
+        match name == $file_name;
+        rewrite {
+            encoding: $new_encoding,
+        }
+    }
+}

@@ -1,0 +1,88 @@
+// Transport primitives — network protocol definitions needed to describe basic protocols (tcp/ip, udp).
+
+type TransportProtocol {
+    name: #Symbol,
+    layer: #Symbol,
+    protocol_type: #Symbol,
+    reliability: #Symbol,
+}
+
+type Connection {
+    id: #Symbol,
+    local_addr: #Symbol,
+    remote_addr: #Symbol,
+    state: #Symbol,
+}
+
+type SocketAddress {
+    host: #Symbol,
+    port: #Symbol,
+    family: #Symbol,
+}
+
+type Packet {
+    source: #Symbol,
+    destination: #Symbol,
+    length: #Symbol,
+}
+
+pattern reliable_protocol {
+    TransportProtocol
+    and (reliability == "reliable_ordered")
+}
+
+pattern datagram_protocol {
+    TransportProtocol
+    and (protocol_type == "datagram")
+}
+
+pattern transport_layer {
+    TransportProtocol
+    and (layer == "transport")
+}
+
+pattern established_connection {
+    Connection
+    and (state == "established")
+}
+
+pattern ipv4_address {
+    SocketAddress
+    and (family == "ipv4")
+}
+
+transform change_reliability(protocol_name: #Symbol, new_reliability: #Symbol) {
+    for TransportProtocol {
+        match name == $protocol_name;
+        rewrite {
+            reliability: $new_reliability,
+        }
+    }
+}
+
+transform close_connection(conn_id: #Symbol) {
+    for Connection {
+        match id == $conn_id;
+        rewrite {
+            state: "closed",
+        }
+    }
+}
+
+transform change_port(addr_host: #Symbol, new_port: #Symbol) {
+    for SocketAddress {
+        match host == $addr_host;
+        rewrite {
+            port: $new_port,
+        }
+    }
+}
+
+transform change_packet_destination(packet_source: #Symbol, new_dest: #Symbol) {
+    for Packet {
+        match source == $packet_source;
+        rewrite {
+            destination: $new_dest,
+        }
+    }
+}

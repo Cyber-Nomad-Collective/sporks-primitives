@@ -1,0 +1,81 @@
+// Interfaces primitives — basic interface definitions (api, abi, sdk).
+
+type APIDef {
+    name: #Symbol,
+    version: #Symbol,
+    protocol: #Symbol,
+}
+
+type ABIDef {
+    name: #Symbol,
+    architecture: #Symbol,
+    calling_convention: #Symbol,
+}
+
+type SDKDef {
+    name: #Symbol,
+    language: #Symbol,
+    version: #Symbol,
+}
+
+type APIEndpoint {
+    path: #Symbol,
+    method: #Symbol,
+    operation_id: #Symbol,
+}
+
+pattern rest_api {
+    APIDef
+    and (protocol == "rest")
+}
+
+pattern graphql_api {
+    APIDef
+    and (protocol == "graphql")
+}
+
+pattern get_endpoint {
+    APIEndpoint
+    and (method == "GET")
+}
+
+pattern arm64_abi {
+    ABIDef
+    and (architecture == "arm64")
+}
+
+transform bump_api_version(api_name: #Symbol, new_version: #Symbol) {
+    for APIDef {
+        match name == $api_name;
+        rewrite {
+            version: $new_version,
+        }
+    }
+}
+
+transform change_protocol(api_name: #Symbol, new_protocol: #Symbol) {
+    for APIDef {
+        match name == $api_name;
+        rewrite {
+            protocol: $new_protocol,
+        }
+    }
+}
+
+transform rename_endpoint(old_id: #Symbol, new_id: #Symbol) {
+    for APIEndpoint {
+        match operation_id == $old_id;
+        rewrite {
+            operation_id: $new_id,
+        }
+    }
+}
+
+transform change_sdk_language(sdk_name: #Symbol, new_language: #Symbol) {
+    for SDKDef {
+        match name == $sdk_name;
+        rewrite {
+            language: $new_language,
+        }
+    }
+}

@@ -1,0 +1,133 @@
+// Analysis primitives — code analysis, linting, and metrics type definitions.
+//
+// Describes static analysis rules, complexity metrics, and diagnostic
+// collection patterns for code quality tooling.
+
+// ── Types ───────────────────────────────────────────────
+
+type AnalysisRule {
+    name: #Symbol,
+    severity: #Symbol,
+    category: #Symbol,
+    enabled: #Symbol,
+}
+
+type Diagnostic {
+    name: #Symbol,
+    severity: #Symbol,
+    message: #Symbol,
+    location: #Symbol,
+    rule: #Symbol,
+}
+
+type ComplexityMetric {
+    name: #Symbol,
+    value: #Symbol,
+    threshold: #Symbol,
+    target: #Symbol,
+}
+
+type CodeSmell {
+    name: #Symbol,
+    pattern: #Symbol,
+    location: #Symbol,
+    suggestion: #Symbol,
+}
+
+type AnalysisReport {
+    name: #Symbol,
+    rule_count: #Symbol,
+    diagnostic_count: #Symbol,
+    duration_ms: #Symbol,
+}
+
+type DependencyGraph {
+    root: #Symbol,
+    node_count: #Symbol,
+    edge_count: #Symbol,
+    circular: #Symbol,
+}
+
+// ── Patterns ────────────────────────────────────────────
+
+pattern error_diagnostic {
+    Diagnostic
+    and (severity == "error")
+}
+
+pattern warning_diagnostic {
+    Diagnostic
+    and (severity == "warning")
+}
+
+pattern high_complexity {
+    ComplexityMetric
+    containing $threshold: #Symbol
+}
+
+pattern cyclomatic_complexity {
+    ComplexityMetric
+    and (name == "cyclomatic")
+}
+
+pattern dead_code_smell {
+    CodeSmell
+    and (pattern == "unused")
+}
+
+pattern circular_dependency {
+    DependencyGraph
+    and (circular == "true")
+}
+
+pattern enabled_rule {
+    AnalysisRule
+    and (enabled == "true")
+}
+
+// ── Transforms ──────────────────────────────────────────
+
+transform change_severity(rule_name: #Symbol, new_severity: #Symbol) {
+    for AnalysisRule {
+        match name == $rule_name;
+        rewrite {
+            severity: $new_severity,
+        }
+    }
+}
+
+transform enable_rule(rule_name: #Symbol) {
+    for AnalysisRule {
+        match name == $rule_name;
+        rewrite {
+            enabled: "true",
+        }
+    }
+}
+
+transform disable_rule(rule_name: #Symbol) {
+    for AnalysisRule {
+        match name == $rule_name;
+        rewrite {
+            enabled: "false",
+        }
+    }
+}
+
+transform update_threshold(metric_name: #Symbol, new_threshold: #Symbol) {
+    for ComplexityMetric {
+        match name == $metric_name;
+        rewrite {
+            threshold: $new_threshold,
+        }
+    }
+}
+
+transform fix_code_smell(smell_name: #Symbol, fix: #Symbol) {
+    for CodeSmell {
+        match name == $smell_name;
+        rewrite {
+            suggestion: $fix,
+        }
+    }
+}
