@@ -1,0 +1,16 @@
+// Dependency-model primitives — dependency and dependency resolution pattern declarations.
+
+pattern runtime_dependency {
+    Dependency
+    and (dep_type == "runtime")
+}
+
+pattern dev_dependency {
+    Dependency
+    and (dep_type == "development")
+}
+
+pattern pinned_dependency {
+    Dependency
+    containing $version: #Symbol
+}

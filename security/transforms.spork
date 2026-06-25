@@ -1,0 +1,37 @@
+// Security — transforms.
+
+transform change_policy_enforcement(policy_name: #Symbol, new_mode: #Symbol) {
+    for SecurityPolicy {
+        match name == $policy_name;
+        rewrite {
+            enforcement: $new_mode,
+        }
+    }
+}
+
+transform fix_vulnerability(vuln_id: #Symbol, new_version: #Symbol) {
+    for Vulnerability {
+        match id == $vuln_id;
+        rewrite {
+            fixed_version: $new_version,
+        }
+    }
+}
+
+transform rotate_secret(secret_name: #Symbol, new_days: #Symbol) {
+    for Secret {
+        match name == $secret_name;
+        rewrite {
+            rotation_days: $new_days,
+        }
+    }
+}
+
+transform update_compliance_status(rule_name: #Symbol, new_status: #Symbol) {
+    for ComplianceRule {
+        match name == $rule_name;
+        rewrite {
+            status: $new_status,
+        }
+    }
+}

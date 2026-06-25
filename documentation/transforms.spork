@@ -1,0 +1,28 @@
+// Documentation primitives — language-agnostic documentation transform rules.
+
+transform rename_doc_symbol(old: #Symbol, new: #Symbol) {
+    for DocSymbol {
+        match name == $old;
+        rewrite {
+            name: $new,
+        }
+    }
+}
+
+transform change_doc_format(config_name: #Symbol, new_format: #Symbol) {
+    for DocConfig {
+        match output_path == $config_name;
+        rewrite {
+            format: $new_format,
+        }
+    }
+}
+
+transform update_doc_content(target: #Symbol, new_content: #Symbol) {
+    for DocBlock {
+        match target == $target;
+        rewrite {
+            content: $new_content,
+        }
+    }
+}

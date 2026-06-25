@@ -1,0 +1,21 @@
+// Navigation primitives — navigation link and flow pattern declarations.
+
+pattern external_link {
+    Link
+    and (link_type == "external")
+}
+
+pattern push_link {
+    Link
+    and (link_type == "push")
+}
+
+pattern named_route {
+    Route
+    containing $component: #Symbol
+}
+
+pattern nested_flow {
+    Flow
+    containing $start: #Symbol
+}

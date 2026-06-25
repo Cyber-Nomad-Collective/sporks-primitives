@@ -1,0 +1,31 @@
+// Scheduling primitives — job scheduling, triggers, execution, and history pattern declarations.
+
+pattern cron_trigger {
+    JobTrigger
+    and (trigger_type == "cron")
+    containing $expression: #Symbol
+}
+
+pattern interval_trigger {
+    JobTrigger
+    and (trigger_type == "interval")
+    containing $expression: #Symbol
+}
+
+pattern dependent_job {
+    JobDependency
+    and (condition == "success")
+    containing $depends_on: #Symbol
+}
+
+pattern retry_on_failure {
+    ScheduledJob
+    and (max_retries > "0")
+    containing $job_id: #Symbol
+}
+
+pattern job_concurrency {
+    JobLock
+    and (expires_at != "null")
+    containing $lock_name: #Symbol
+}

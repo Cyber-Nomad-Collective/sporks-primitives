@@ -1,0 +1,47 @@
+// Data primitives — database, storage, and data model transform rules.
+
+transform rename_table(old: #Symbol, new: #Symbol) {
+    for TableDef {
+        match name == $old;
+        rewrite {
+            name: $new,
+        }
+    }
+}
+
+transform change_column_type(column_name: #Symbol, new_type: #Symbol) {
+    for ColumnDef {
+        match name == $column_name;
+        rewrite {
+            column_type: $new_type,
+        }
+    }
+}
+
+transform apply_migration(migration_name: #Symbol) {
+    for Migration {
+        match name == $migration_name;
+        rewrite {
+            applied: "true",
+        }
+    }
+}
+
+transform change_cache_ttl(cache_name: #Symbol, new_ttl: #Symbol) {
+    for CacheStrategy {
+        match name == $cache_name;
+        rewrite {
+            ttl_seconds: $new_ttl,
+        }
+    }
+}
+
+transform add_index(index_name: #Symbol, table: #Symbol, columns: #Symbol) {
+    for IndexDef {
+        match name == $index_name;
+        rewrite {
+            table: $table,
+            columns: $columns,
+        }
+    }
+}

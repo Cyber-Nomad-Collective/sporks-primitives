@@ -1,0 +1,36 @@
+// Security — patterns.
+
+pattern critical_vulnerability {
+    Vulnerability
+    and (severity == "critical")
+}
+
+pattern high_vulnerability {
+    Vulnerability
+    and (severity == "high")
+}
+
+pattern rotated_secret {
+    Secret
+    containing $rotation_days: #Symbol
+}
+
+pattern soc2_rule {
+    ComplianceRule
+    and (standard == "soc2")
+}
+
+pattern denied_audit {
+    AuditLog
+    and (outcome == "denied")
+}
+
+pattern aes_encryption {
+    EncryptionConfig
+    and (algorithm == "aes")
+}
+
+pattern blocking_policy {
+    SecurityPolicy
+    and (enforcement == "block")
+}

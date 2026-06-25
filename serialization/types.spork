@@ -1,0 +1,67 @@
+// Serialization primitives — serializers, deserializers, schemas, formats, and codecs type definitions.
+
+type Serializer {
+    serializer_id: #Symbol,
+    format: #Symbol,
+    schema_id: #Symbol,
+    compression: #Symbol,
+    encoding: #Symbol,
+}
+
+type Deserializer {
+    deserializer_id: #Symbol,
+    format: #Symbol,
+    schema_id: #Symbol,
+    target_type: #Symbol,
+    strict: #Symbol,
+}
+
+type SchemaRegistry {
+    registry_id: #Symbol,
+    endpoint: #Symbol,
+    auth: #Symbol,
+    cache_size: #Symbol,
+    compatibility: #Symbol,
+}
+
+type WireFormat {
+    format_id: #Symbol,
+    name: #Symbol,
+    content_type: #Symbol,
+    binary: #Symbol,
+    schema_required: #Symbol,
+}
+
+type SchemaVersion {
+    schema_id: #Symbol,
+    version: #Symbol,
+    fingerprint: #Symbol,
+    schema_text: #Symbol,
+    created_at: #Symbol,
+}
+
+type CompatibilityCheck {
+    check_id: #Symbol,
+    strategy: #Symbol,
+    allow_forward: #Symbol,
+    allow_backward: #Symbol,
+    allow_full: #Symbol,
+}
+
+type Codec {
+    codec_id: #Symbol,
+    name: #Symbol,
+    encoder: #Symbol,
+    decoder: #Symbol,
+    wire_format: #Symbol,
+    schema_id: #Symbol,
+}
+
+type SerdeConfig {
+    config_id: #Symbol,
+    default_format: #Symbol,
+    registry_url: #Symbol,
+    fail_on_unknown: #Symbol,
+    cache_schemas: #Symbol,
+    pretty_print: #Symbol,
+}

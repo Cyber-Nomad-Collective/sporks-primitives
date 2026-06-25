@@ -1,0 +1,26 @@
+// Transport primitives — network protocol pattern declarations.
+
+pattern reliable_protocol {
+    TransportProtocol
+    and (reliability == "reliable_ordered")
+}
+
+pattern datagram_protocol {
+    TransportProtocol
+    and (protocol_type == "datagram")
+}
+
+pattern transport_layer {
+    TransportProtocol
+    and (layer == "transport")
+}
+
+pattern established_connection {
+    Connection
+    and (state == "established")
+}
+
+pattern ipv4_address {
+    SocketAddress
+    and (family == "ipv4")
+}

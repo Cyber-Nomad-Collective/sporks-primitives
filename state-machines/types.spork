@@ -1,0 +1,73 @@
+// State Machines primitives — states, transitions, events, guards, and actions type definitions.
+
+type StateMachine {
+    machine_id: #Symbol,
+    name: #Symbol,
+    initial_state: #Symbol,
+    current_state: #Symbol,
+    context: #Symbol,
+    version: #Symbol,
+}
+
+type State {
+    state_id: #Symbol,
+    name: #Symbol,
+    machine_id: #Symbol,
+    parent: #Symbol,
+    type: #Symbol,
+    metadata: #Symbol,
+}
+
+type Transition {
+    transition_id: #Symbol,
+    from_state: #Symbol,
+    to_state: #Symbol,
+    event: #Symbol,
+    guard: #Symbol,
+    priority: #Symbol,
+}
+
+type Event {
+    event_id: #Symbol,
+    name: #Symbol,
+    payload: #Symbol,
+    timestamp: #Symbol,
+    source: #Symbol,
+}
+
+type Guard {
+    guard_id: #Symbol,
+    name: #Symbol,
+    expression: #Symbol,
+    fallback: #Symbol,
+    description: #Symbol,
+}
+
+type Action {
+    action_id: #Symbol,
+    name: #Symbol,
+    handler: #Symbol,
+    params: #Symbol,
+    async: #Symbol,
+}
+
+type EntryAction {
+    state_id: #Symbol,
+    action_id: #Symbol,
+    order: #Symbol,
+    condition: #Symbol,
+}
+
+type ExitAction {
+    state_id: #Symbol,
+    action_id: #Symbol,
+    order: #Symbol,
+    condition: #Symbol,
+}
+
+type FinalState {
+    state_id: #Symbol,
+    machine_id: #Symbol,
+    result: #Symbol,
+    is_terminal: #Symbol,
+}

@@ -1,0 +1,16 @@
+// Construct primitives — schema validation and meta-type construction pattern declarations.
+
+pattern required_field {
+    FieldDef
+    and (required == "true")
+}
+
+pattern optional_field {
+    FieldDef
+    and (required == "false")
+}
+
+pattern named_schema {
+    Schema
+    containing $version: #Symbol
+}

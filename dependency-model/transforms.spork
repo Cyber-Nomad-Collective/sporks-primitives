@@ -1,0 +1,28 @@
+// Dependency-model primitives — dependency and dependency resolution transform rules.
+
+transform bump_version(dep_name: #Symbol, new_version: #Symbol) {
+    for Dependency {
+        match name == $dep_name;
+        rewrite {
+            version: $new_version,
+        }
+    }
+}
+
+transform change_dep_type(dep_name: #Symbol, new_type: #Symbol) {
+    for Dependency {
+        match name == $dep_name;
+        rewrite {
+            dep_type: $new_type,
+        }
+    }
+}
+
+transform change_strategy(resolver_name: #Symbol, new_strategy: #Symbol) {
+    for Resolver {
+        match name == $resolver_name;
+        rewrite {
+            strategy: $new_strategy,
+        }
+    }
+}

@@ -1,0 +1,7 @@
+// Infra — Network type definition.
+
+type Network {
+    name: #Symbol,
+    cidr: #Symbol,
+    network_type: #Symbol,
+}

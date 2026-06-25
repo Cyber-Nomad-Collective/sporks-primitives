@@ -1,0 +1,37 @@
+// Infra — transforms.
+
+transform change_service_port(service_name: #Symbol, new_port: #Symbol) {
+    for Service {
+        match name == $service_name;
+        rewrite {
+            port: $new_port,
+        }
+    }
+}
+
+transform migrate_server_region(server_name: #Symbol, new_region: #Symbol) {
+    for Server {
+        match name == $server_name;
+        rewrite {
+            region: $new_region,
+        }
+    }
+}
+
+transform update_container_image(container_name: #Symbol, new_image: #Symbol) {
+    for Container {
+        match name == $container_name;
+        rewrite {
+            image: $new_image,
+        }
+    }
+}
+
+transform resize_network_cidr(network_name: #Symbol, new_cidr: #Symbol) {
+    for Network {
+        match name == $network_name;
+        rewrite {
+            cidr: $new_cidr,
+        }
+    }
+}

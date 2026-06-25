@@ -1,0 +1,8 @@
+// Security — SecurityPolicy type definition.
+
+type SecurityPolicy {
+    name: #Symbol,
+    policy_type: #Symbol,
+    enforcement: #Symbol,
+    scope: #Symbol,
+}

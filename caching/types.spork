@@ -1,0 +1,60 @@
+// Caching primitives — cache strategies, policies, and lifecycle type definitions.
+
+type CacheEntry {
+    key: #Symbol,
+    value: #Symbol,
+    ttl: #Symbol,
+    created_at: #Symbol,
+    last_accessed: #Symbol,
+    hit_count: #Symbol,
+}
+
+type CachePolicy {
+    name: #Symbol,
+    eviction: #Symbol,
+    max_size: #Symbol,
+    default_ttl: #Symbol,
+    refresh_ahead: #Symbol,
+}
+
+type CacheBackend {
+    backend_type: #Symbol,
+    connection_string: #Symbol,
+    serializer: #Symbol,
+    compression: #Symbol,
+    cluster_mode: #Symbol,
+}
+
+type CacheInvalidation {
+    strategy: #Symbol,
+    trigger: #Symbol,
+    scope: #Symbol,
+    batch_size: #Symbol,
+    propagation: #Symbol,
+}
+
+type CacheStats {
+    hit_ratio: #Symbol,
+    miss_count: #Symbol,
+    eviction_count: #Symbol,
+    memory_used: #Symbol,
+    key_count: #Symbol,
+    avg_latency: #Symbol,
+}
+
+type CacheWarming {
+    strategy: #Symbol,
+    data_source: #Symbol,
+    concurrency: #Symbol,
+    on_startup: #Symbol,
+    priority_keys: #Symbol,
+}
+
+type DistributedCache {
+    topology: #Symbol,
+    replication_factor: #Symbol,
+    consistency: #Symbol,
+    partition_strategy: #Symbol,
+    failover: #Symbol,
+    nodes: #Symbol,
+}

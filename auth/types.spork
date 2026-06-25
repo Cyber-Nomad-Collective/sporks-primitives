@@ -1,0 +1,23 @@
+// Auth primitives — language-agnostic authentication type definitions.
+
+type AuthenticationScheme {
+    name: #Symbol,
+    provider: #Symbol,
+    token_type: #Symbol,
+}
+
+type Credential {
+    identifier: #Symbol,
+    secret: #Symbol,
+}
+
+type AuthToken {
+    value: #Symbol,
+    token_type: #Symbol,
+    issuer: #Symbol,
+}
+
+type AuthError {
+    code: #Symbol,
+    message: #Symbol,
+}

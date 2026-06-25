@@ -1,0 +1,31 @@
+// Caching primitives — cache strategies, policies, and lifecycle pattern declarations.
+
+pattern ttl_policy {
+    CachePolicy
+    and (eviction == "ttl")
+    containing $ttl: #Symbol
+}
+
+pattern lru_eviction {
+    CachePolicy
+    and (eviction == "lru")
+    containing $max_size: #Symbol
+}
+
+pattern write_through {
+    CacheBackend
+    and (backend_type == "write_through")
+    containing $connection_string: #Symbol
+}
+
+pattern cache_aside {
+    CacheBackend
+    and (backend_type == "cache_aside")
+    containing $serializer: #Symbol
+}
+
+pattern cache_stampede {
+    CacheEntry
+    and (ttl == "expired")
+    containing $key: #Symbol
+}

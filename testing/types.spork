@@ -1,0 +1,41 @@
+// Testing primitives — test framework, assertion, and coverage type definitions.
+
+type TestCase {
+    name: #Symbol,
+    suite: #Symbol,
+    status: #Symbol,
+    duration_ms: #Symbol,
+}
+
+type TestSuite {
+    name: #Symbol,
+    test_count: #Symbol,
+    framework: #Symbol,
+}
+
+type Assertion {
+    assert_type: #Symbol,
+    expected: #Symbol,
+    actual: #Symbol,
+    passed: #Symbol,
+}
+
+type Mock {
+    name: #Symbol,
+    target: #Symbol,
+    behavior: #Symbol,
+}
+
+type Fixture {
+    name: #Symbol,
+    scope: #Symbol,
+    setup: #Symbol,
+    teardown: #Symbol,
+}
+
+type CoverageReport {
+    lines_pct: #Symbol,
+    branches_pct: #Symbol,
+    functions_pct: #Symbol,
+    uncovered: #Symbol,
+}

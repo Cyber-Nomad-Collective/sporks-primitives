@@ -1,0 +1,24 @@
+// Filesystem primitives — declarative directory and file system structure type definitions.
+
+type FSEntry {
+    name: #Symbol,
+    entry_type: #Symbol,
+    path: #Symbol,
+}
+
+type FileDef {
+    name: #Symbol,
+    template: #Symbol,
+    encoding: #Symbol,
+}
+
+type DirectoryDef {
+    name: #Symbol,
+    path: #Symbol,
+    merge_strategy: #Symbol,
+}
+
+type FilesystemTree {
+    root: #Symbol,
+    description: #Symbol,
+}

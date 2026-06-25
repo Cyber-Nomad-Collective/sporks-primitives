@@ -1,0 +1,27 @@
+// Transport primitives — network protocol type definitions.
+
+type TransportProtocol {
+    name: #Symbol,
+    layer: #Symbol,
+    protocol_type: #Symbol,
+    reliability: #Symbol,
+}
+
+type Connection {
+    id: #Symbol,
+    local_addr: #Symbol,
+    remote_addr: #Symbol,
+    state: #Symbol,
+}
+
+type SocketAddress {
+    host: #Symbol,
+    port: #Symbol,
+    family: #Symbol,
+}
+
+type Packet {
+    source: #Symbol,
+    destination: #Symbol,
+    length: #Symbol,
+}

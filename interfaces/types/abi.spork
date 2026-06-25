@@ -1,0 +1,7 @@
+// Interfaces — ABIDef type definition.
+
+type ABIDef {
+    name: #Symbol,
+    architecture: #Symbol,
+    calling_convention: #Symbol,
+}

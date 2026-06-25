@@ -1,0 +1,41 @@
+// Observability primitives — logging, metrics, and tracing pattern declarations.
+
+pattern error_log {
+    LogEntry
+    and (level == "error")
+}
+
+pattern warn_log {
+    LogEntry
+    and (level == "warn")
+}
+
+pattern counter_metric {
+    Metric
+    and (metric_type == "counter")
+}
+
+pattern gauge_metric {
+    Metric
+    and (metric_type == "gauge")
+}
+
+pattern histogram_metric {
+    Metric
+    and (metric_type == "histogram")
+}
+
+pattern root_span {
+    Span
+    containing $trace_id: #Symbol
+}
+
+pattern otlp_exporter {
+    Exporter
+    and (exporter_type == "otlp")
+}
+
+pattern critical_alert {
+    Alert
+    and (severity == "critical")
+}

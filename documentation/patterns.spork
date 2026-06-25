@@ -1,0 +1,16 @@
+// Documentation primitives — language-agnostic documentation pattern declarations.
+
+pattern public_doc_symbol {
+    DocSymbol
+    and (visibility == "public")
+}
+
+pattern deprecated_symbol {
+    DocSymbol
+    and (visibility == "deprecated")
+}
+
+pattern function_doc {
+    DocBlock
+    and (kind == "function")
+}

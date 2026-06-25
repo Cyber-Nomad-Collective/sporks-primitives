@@ -1,0 +1,16 @@
+// Auth primitives — language-agnostic authentication pattern declarations.
+
+pattern auth_scheme {
+    AuthenticationScheme
+    containing $name: #Symbol
+}
+
+pattern bearer_token_scheme {
+    AuthenticationScheme
+    and (token_type == "bearer")
+}
+
+pattern named_scheme {
+    AuthenticationScheme
+    and (name == "oauth_*")
+}

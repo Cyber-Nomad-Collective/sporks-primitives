@@ -1,0 +1,36 @@
+// Data primitives — database, storage, and data model pattern declarations.
+
+pattern postgres_model {
+    DataModel
+    and (engine == "postgresql")
+}
+
+pattern mysql_model {
+    DataModel
+    and (engine == "mysql")
+}
+
+pattern not_null_column {
+    ColumnDef
+    and (nullable == "false")
+}
+
+pattern primary_key_index {
+    IndexDef
+    and (unique == "true")
+}
+
+pattern select_query {
+    Query
+    and (query_type == "select")
+}
+
+pattern redis_cache {
+    CacheStrategy
+    and (backend == "redis")
+}
+
+pattern pending_migration {
+    Migration
+    and (applied == "false")
+}

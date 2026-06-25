@@ -1,0 +1,28 @@
+// Concurrency primitives — language-agnostic concurrency transform rules.
+
+transform escalate_priority(task: #Symbol, new_priority: #Symbol) {
+    for Task {
+        match id == $task;
+        rewrite {
+            priority: $new_priority,
+        }
+    }
+}
+
+transform release_lock(lock_name: #Symbol) {
+    for Lock {
+        match name == $lock_name;
+        rewrite {
+            owner: "released",
+        }
+    }
+}
+
+transform resize_channel(ch: #Symbol, new_capacity: #Symbol) {
+    for Channel {
+        match name == $ch;
+        rewrite {
+            capacity: $new_capacity,
+        }
+    }
+}

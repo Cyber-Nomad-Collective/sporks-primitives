@@ -1,0 +1,19 @@
+// Authorization primitives — language-agnostic access control transform rules.
+
+transform grant_action(subject: #Symbol, action: #Symbol) {
+    for Permission {
+        match subject == $subject;
+        rewrite {
+            action: $action,
+        }
+    }
+}
+
+transform transfer_ownership(resource: #Symbol, new_owner: #Symbol) {
+    for Resource {
+        match type == $resource;
+        rewrite {
+            owner: $new_owner,
+        }
+    }
+}

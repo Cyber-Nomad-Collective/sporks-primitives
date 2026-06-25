@@ -1,0 +1,24 @@
+// Concurrency primitives — language-agnostic concurrency type definitions.
+
+type Task {
+    id: #Symbol,
+    priority: #Symbol,
+    status: #Symbol,
+}
+
+type Lock {
+    name: #Symbol,
+    owner: #Symbol,
+    lock_type: #Symbol,
+}
+
+type Channel {
+    name: #Symbol,
+    capacity: #Symbol,
+    direction: #Symbol,
+}
+
+type Semaphore {
+    name: #Symbol,
+    permits: #Symbol,
+}

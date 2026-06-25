@@ -1,0 +1,8 @@
+// Containers — Volume type definition.
+
+type Volume {
+    name: #Symbol,
+    source: #Symbol,
+    mount_path: #Symbol,
+    volume_type: #Symbol,
+}

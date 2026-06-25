@@ -1,0 +1,21 @@
+// Concurrency primitives — language-agnostic concurrency pattern declarations.
+
+pattern running_task {
+    Task
+    and (status == "running")
+}
+
+pattern high_priority_task {
+    Task
+    and (priority == "critical")
+}
+
+pattern held_lock {
+    Lock
+    containing $owner: #Symbol
+}
+
+pattern buffered_channel {
+    Channel
+    and (capacity == "buffered")
+}

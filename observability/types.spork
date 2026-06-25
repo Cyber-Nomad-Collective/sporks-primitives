@@ -1,0 +1,44 @@
+// Observability primitives — logging, metrics, and tracing type definitions.
+
+type LogEntry {
+    level: #Symbol,
+    message: #Symbol,
+    timestamp: #Symbol,
+    span_id: #Symbol,
+}
+
+type Metric {
+    name: #Symbol,
+    metric_type: #Symbol,
+    value: #Symbol,
+    labels: #Symbol,
+}
+
+type Span {
+    id: #Symbol,
+    trace_id: #Symbol,
+    parent_id: #Symbol,
+    operation: #Symbol,
+    duration_ms: #Symbol,
+}
+
+type Trace {
+    id: #Symbol,
+    root_span: #Symbol,
+    span_count: #Symbol,
+    status: #Symbol,
+}
+
+type Exporter {
+    name: #Symbol,
+    exporter_type: #Symbol,
+    endpoint: #Symbol,
+    format: #Symbol,
+}
+
+type Alert {
+    name: #Symbol,
+    condition: #Symbol,
+    severity: #Symbol,
+    channel: #Symbol,
+}

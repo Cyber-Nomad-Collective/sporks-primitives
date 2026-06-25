@@ -1,0 +1,37 @@
+// Reactive — transforms.
+
+transform rename_signal(old: #Symbol, new: #Symbol) {
+    for Signal {
+        match name == $old;
+        rewrite {
+            name: $new,
+        }
+    }
+}
+
+transform set_signal_initial(signal_name: #Symbol, new_value: #Symbol) {
+    for Signal {
+        match name == $signal_name;
+        rewrite {
+            initial_value: $new_value,
+        }
+    }
+}
+
+transform change_effect_schedule(effect_name: #Symbol, new_schedule: #Symbol) {
+    for Effect {
+        match name == $effect_name;
+        rewrite {
+            schedule: $new_schedule,
+        }
+    }
+}
+
+transform resize_stream_buffer(stream_name: #Symbol, new_size: #Symbol) {
+    for Stream {
+        match name == $stream_name;
+        rewrite {
+            buffer_size: $new_size,
+        }
+    }
+}

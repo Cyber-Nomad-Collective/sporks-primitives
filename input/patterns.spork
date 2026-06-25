@@ -1,0 +1,21 @@
+// Input primitives — typed input generalization pattern declarations.
+
+pattern required_input {
+    InputDef
+    and (required == "true")
+}
+
+pattern text_input {
+    InputDef
+    and (input_type == "text")
+}
+
+pattern number_input {
+    InputDef
+    and (input_type == "number")
+}
+
+pattern named_validator {
+    InputValidator
+    containing $rule: #Symbol
+}

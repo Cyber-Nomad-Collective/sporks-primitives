@@ -1,0 +1,50 @@
+// Data primitives — database, storage, and data model type definitions.
+
+type DataModel {
+    name: #Symbol,
+    engine: #Symbol,
+    table_count: #Symbol,
+    version: #Symbol,
+}
+
+type TableDef {
+    name: #Symbol,
+    columns: #Symbol,
+    primary_key: #Symbol,
+    indexes: #Symbol,
+}
+
+type ColumnDef {
+    name: #Symbol,
+    column_type: #Symbol,
+    nullable: #Symbol,
+    default_value: #Symbol,
+}
+
+type Migration {
+    name: #Symbol,
+    version: #Symbol,
+    direction: #Symbol,
+    applied: #Symbol,
+}
+
+type Query {
+    name: #Symbol,
+    query_type: #Symbol,
+    target_table: #Symbol,
+    cached: #Symbol,
+}
+
+type CacheStrategy {
+    name: #Symbol,
+    backend: #Symbol,
+    ttl_seconds: #Symbol,
+    invalidation: #Symbol,
+}
+
+type IndexDef {
+    name: #Symbol,
+    table: #Symbol,
+    columns: #Symbol,
+    unique: #Symbol,
+}

@@ -1,0 +1,37 @@
+// Messaging primitives — message brokers, queues, topics, and delivery semantics transform rules.
+
+transform change_broker(queue: #Symbol, new_broker: #Symbol) {
+    for MessageBroker {
+        match broker_type == $queue;
+        rewrite {
+            broker_type: $new_broker,
+        }
+    }
+}
+
+transform add_retry_policy(consumer: #Symbol, max_attempts: #Symbol) {
+    for MessageRetry {
+        match max_attempts == $consumer;
+        rewrite {
+            max_attempts: $max_attempts,
+        }
+    }
+}
+
+transform move_to_dlq(message: #Symbol, reason: #Symbol) {
+    for DeadLetter {
+        match original_queue == $message;
+        rewrite {
+            reason: $reason,
+        }
+    }
+}
+
+transform change_delivery_mode(producer: #Symbol, mode: #Symbol) {
+    for MessageProducer {
+        match producer_id == $producer;
+        rewrite {
+            delivery_mode: $mode,
+        }
+    }
+}

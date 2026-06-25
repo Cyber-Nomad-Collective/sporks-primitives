@@ -1,0 +1,7 @@
+// Interfaces — SDKDef type definition.
+
+type SDKDef {
+    name: #Symbol,
+    language: #Symbol,
+    version: #Symbol,
+}

@@ -1,0 +1,6 @@
+// Reactive — Effect type definition.
+
+type Effect {
+    name: #Symbol,
+    schedule: #Symbol,
+}

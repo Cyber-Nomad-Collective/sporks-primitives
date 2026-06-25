@@ -1,0 +1,46 @@
+// Analysis primitives — code analysis, linting, and metrics transform rules.
+
+transform change_severity(rule_name: #Symbol, new_severity: #Symbol) {
+    for AnalysisRule {
+        match name == $rule_name;
+        rewrite {
+            severity: $new_severity,
+        }
+    }
+}
+
+transform enable_rule(rule_name: #Symbol) {
+    for AnalysisRule {
+        match name == $rule_name;
+        rewrite {
+            enabled: "true",
+        }
+    }
+}
+
+transform disable_rule(rule_name: #Symbol) {
+    for AnalysisRule {
+        match name == $rule_name;
+        rewrite {
+            enabled: "false",
+        }
+    }
+}
+
+transform update_threshold(metric_name: #Symbol, new_threshold: #Symbol) {
+    for ComplexityMetric {
+        match name == $metric_name;
+        rewrite {
+            threshold: $new_threshold,
+        }
+    }
+}
+
+transform fix_code_smell(smell_name: #Symbol, fix: #Symbol) {
+    for CodeSmell {
+        match name == $smell_name;
+        rewrite {
+            suggestion: $fix,
+        }
+    }
+}

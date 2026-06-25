@@ -1,0 +1,14 @@
+// Containers — ContainerRun, PortMapping type definitions.
+
+type ContainerRun {
+    name: #Symbol,
+    image: #Symbol,
+    command: #Symbol,
+    restart_policy: #Symbol,
+}
+
+type PortMapping {
+    container_port: #Symbol,
+    host_port: #Symbol,
+    protocol: #Symbol,
+}

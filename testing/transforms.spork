@@ -1,0 +1,37 @@
+// Testing primitives — test framework, assertion, and coverage transform rules.
+
+transform rename_test(old: #Symbol, new: #Symbol) {
+    for TestCase {
+        match name == $old;
+        rewrite {
+            name: $new,
+        }
+    }
+}
+
+transform change_assertion_expected(assert_name: #Symbol, new_expected: #Symbol) {
+    for Assertion {
+        match assert_type == $assert_name;
+        rewrite {
+            expected: $new_expected,
+        }
+    }
+}
+
+transform update_mock_behavior(mock_name: #Symbol, new_behavior: #Symbol) {
+    for Mock {
+        match name == $mock_name;
+        rewrite {
+            behavior: $new_behavior,
+        }
+    }
+}
+
+transform change_fixture_scope(fixture_name: #Symbol, new_scope: #Symbol) {
+    for Fixture {
+        match name == $fixture_name;
+        rewrite {
+            scope: $new_scope,
+        }
+    }
+}

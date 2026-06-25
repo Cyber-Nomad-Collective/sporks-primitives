@@ -1,0 +1,37 @@
+// Scheduling primitives — job scheduling, triggers, execution, and history transform rules.
+
+transform change_schedule(job: #Symbol, new_schedule: #Symbol) {
+    for JobSchedule {
+        match job_id == $job;
+        rewrite {
+            schedule_id: $new_schedule,
+        }
+    }
+}
+
+transform add_dependency(job: #Symbol, depends_on: #Symbol) {
+    for JobDependency {
+        match job_id == $job;
+        rewrite {
+            depends_on: $depends_on,
+        }
+    }
+}
+
+transform change_cron(trigger: #Symbol, new_expression: #Symbol) {
+    for CronExpression {
+        match expression == $trigger;
+        rewrite {
+            expression: $new_expression,
+        }
+    }
+}
+
+transform pause_job(job: #Symbol) {
+    for ScheduledJob {
+        match job_id == $job;
+        rewrite {
+            enabled: "false",
+        }
+    }
+}

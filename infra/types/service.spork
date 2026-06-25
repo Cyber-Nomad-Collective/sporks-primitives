@@ -1,0 +1,7 @@
+// Infra — Service type definition.
+
+type Service {
+    name: #Symbol,
+    runtime: #Symbol,
+    port: #Symbol,
+}

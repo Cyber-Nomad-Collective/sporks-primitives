@@ -1,0 +1,46 @@
+// Containers — patterns.
+
+pattern latest_tag_image {
+    ContainerImage
+    and (tag == "latest")
+}
+
+pattern pinned_digest_image {
+    ContainerImage
+    containing $digest: #Symbol
+}
+
+pattern always_restart {
+    ContainerRun
+    and (restart_policy == "always")
+}
+
+pattern host_path_volume {
+    Volume
+    and (volume_type == "host_path")
+}
+
+pattern exposed_port {
+    PortMapping
+    containing $host_port: #Symbol
+}
+
+pattern kubernetes_deployment {
+    OrchestrationResource
+    and (kind == "Deployment")
+}
+
+pattern kubernetes_statefulset {
+    OrchestrationResource
+    and (kind == "StatefulSet")
+}
+
+pattern istio_mesh {
+    ServiceMesh
+    and (provider == "istio")
+}
+
+pattern rolling_update {
+    DeploymentStrategy
+    and (strategy_type == "rolling")
+}

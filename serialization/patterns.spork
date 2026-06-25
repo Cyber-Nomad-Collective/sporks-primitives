@@ -1,0 +1,35 @@
+// Serialization primitives — serializers, deserializers, schemas, formats, and codecs pattern declarations.
+
+pattern json_format {
+    WireFormat
+    and (name == "json")
+    containing $content_type: #Symbol
+}
+
+pattern protobuf_format {
+    WireFormat
+    and (name == "protobuf")
+    and (binary == "true")
+    containing $schema_required: #Symbol
+}
+
+pattern avro_format {
+    WireFormat
+    and (name == "avro")
+    and (schema_required == "true")
+    containing $content_type: #Symbol
+}
+
+pattern msgpack_format {
+    WireFormat
+    and (name == "msgpack")
+    and (binary == "true")
+    containing $content_type: #Symbol
+}
+
+pattern schema_evolution {
+    CompatibilityCheck
+    and (allow_forward == "true")
+    and (allow_backward == "true")
+    containing $strategy: #Symbol
+}

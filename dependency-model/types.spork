@@ -1,0 +1,23 @@
+// Dependency-model primitives — dependency and dependency resolution type definitions.
+
+type Dependency {
+    name: #Symbol,
+    version: #Symbol,
+    dep_type: #Symbol,
+}
+
+type Resolver {
+    name: #Symbol,
+    strategy: #Symbol,
+}
+
+type DependencyEdge {
+    from: #Symbol,
+    to: #Symbol,
+    constraint: #Symbol,
+}
+
+type ResolutionResult {
+    status: #Symbol,
+    resolved_count: #Symbol,
+}

@@ -1,0 +1,32 @@
+// State Machines primitives — states, transitions, events, guards, and actions pattern declarations.
+
+pattern valid_transition {
+    Transition
+    and (from_state != "null")
+    and (to_state != "null")
+    containing $event: #Symbol
+}
+
+pattern guarded_transition {
+    Transition
+    and (guard != "null")
+    containing $from_state: #Symbol
+}
+
+pattern entry_action {
+    EntryAction
+    and (order >= "0")
+    containing $state_id: #Symbol
+}
+
+pattern exit_action {
+    ExitAction
+    and (order >= "0")
+    containing $state_id: #Symbol
+}
+
+pattern final_state {
+    FinalState
+    and (is_terminal == "true")
+    containing $machine_id: #Symbol
+}

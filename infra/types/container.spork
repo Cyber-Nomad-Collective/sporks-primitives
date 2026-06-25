@@ -1,0 +1,7 @@
+// Infra — Container type definition.
+
+type Container {
+    name: #Symbol,
+    image: #Symbol,
+    restart_policy: #Symbol,
+}

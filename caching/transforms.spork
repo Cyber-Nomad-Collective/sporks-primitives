@@ -1,0 +1,37 @@
+// Caching primitives — cache strategies, policies, and lifecycle transform rules.
+
+transform change_ttl(entry: #Symbol, new_ttl: #Symbol) {
+    for CacheEntry {
+        match key == $entry;
+        rewrite {
+            ttl: $new_ttl,
+        }
+    }
+}
+
+transform change_backend(policy: #Symbol, new_backend: #Symbol) {
+    for CacheBackend {
+        match backend_type == $policy;
+        rewrite {
+            backend_type: $new_backend,
+        }
+    }
+}
+
+transform add_invalidation(strategy: #Symbol, trigger: #Symbol) {
+    for CacheInvalidation {
+        match strategy == $strategy;
+        rewrite {
+            trigger: $trigger,
+        }
+    }
+}
+
+transform warm_cache(source: #Symbol, keys: #Symbol) {
+    for CacheWarming {
+        match data_source == $source;
+        rewrite {
+            priority_keys: $keys,
+        }
+    }
+}

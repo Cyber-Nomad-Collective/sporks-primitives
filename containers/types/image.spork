@@ -1,0 +1,8 @@
+// Containers — ContainerImage type definition.
+
+type ContainerImage {
+    name: #Symbol,
+    registry: #Symbol,
+    tag: #Symbol,
+    digest: #Symbol,
+}

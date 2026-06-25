@@ -1,0 +1,36 @@
+// Analysis primitives — code analysis, linting, and metrics pattern declarations.
+
+pattern error_diagnostic {
+    Diagnostic
+    and (severity == "error")
+}
+
+pattern warning_diagnostic {
+    Diagnostic
+    and (severity == "warning")
+}
+
+pattern high_complexity {
+    ComplexityMetric
+    containing $threshold: #Symbol
+}
+
+pattern cyclomatic_complexity {
+    ComplexityMetric
+    and (name == "cyclomatic")
+}
+
+pattern dead_code_smell {
+    CodeSmell
+    and (pattern == "unused")
+}
+
+pattern circular_dependency {
+    DependencyGraph
+    and (circular == "true")
+}
+
+pattern enabled_rule {
+    AnalysisRule
+    and (enabled == "true")
+}

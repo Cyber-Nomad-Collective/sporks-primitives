@@ -1,0 +1,6 @@
+// Reactive — Computed type definition.
+
+type Computed {
+    name: #Symbol,
+    cached: #Symbol,
+}

@@ -1,0 +1,37 @@
+// Observability primitives — logging, metrics, and tracing transform rules.
+
+transform change_log_level(logger_name: #Symbol, new_level: #Symbol) {
+    for LogEntry {
+        match span_id == $logger_name;
+        rewrite {
+            level: $new_level,
+        }
+    }
+}
+
+transform update_metric_value(metric_name: #Symbol, new_value: #Symbol) {
+    for Metric {
+        match name == $metric_name;
+        rewrite {
+            value: $new_value,
+        }
+    }
+}
+
+transform change_exporter_endpoint(exporter_name: #Symbol, new_endpoint: #Symbol) {
+    for Exporter {
+        match name == $exporter_name;
+        rewrite {
+            endpoint: $new_endpoint,
+        }
+    }
+}
+
+transform escalate_alert(alert_name: #Symbol, new_severity: #Symbol) {
+    for Alert {
+        match name == $alert_name;
+        rewrite {
+            severity: $new_severity,
+        }
+    }
+}

@@ -1,0 +1,37 @@
+// Interfaces — transforms.
+
+transform bump_api_version(api_name: #Symbol, new_version: #Symbol) {
+    for APIDef {
+        match name == $api_name;
+        rewrite {
+            version: $new_version,
+        }
+    }
+}
+
+transform change_protocol(api_name: #Symbol, new_protocol: #Symbol) {
+    for APIDef {
+        match name == $api_name;
+        rewrite {
+            protocol: $new_protocol,
+        }
+    }
+}
+
+transform rename_endpoint(old_id: #Symbol, new_id: #Symbol) {
+    for APIEndpoint {
+        match operation_id == $old_id;
+        rewrite {
+            operation_id: $new_id,
+        }
+    }
+}
+
+transform change_sdk_language(sdk_name: #Symbol, new_language: #Symbol) {
+    for SDKDef {
+        match name == $sdk_name;
+        rewrite {
+            language: $new_language,
+        }
+    }
+}

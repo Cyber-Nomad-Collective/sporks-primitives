@@ -1,0 +1,13 @@
+// Interfaces — APIDef, APIEndpoint type definitions.
+
+type APIDef {
+    name: #Symbol,
+    version: #Symbol,
+    protocol: #Symbol,
+}
+
+type APIEndpoint {
+    path: #Symbol,
+    method: #Symbol,
+    operation_id: #Symbol,
+}

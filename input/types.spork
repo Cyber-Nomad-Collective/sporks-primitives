@@ -1,0 +1,22 @@
+// Input primitives — typed input generalization type definitions.
+
+type InputDef {
+    name: #Symbol,
+    input_type: #Symbol,
+    required: #Symbol,
+}
+
+type InputValidator {
+    name: #Symbol,
+    rule: #Symbol,
+}
+
+type InputGroup {
+    name: #Symbol,
+    layout: #Symbol,
+}
+
+type FormState {
+    valid: #Symbol,
+    submitting: #Symbol,
+}

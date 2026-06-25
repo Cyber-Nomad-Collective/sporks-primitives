@@ -1,0 +1,22 @@
+// Authorization primitives — language-agnostic access control type definitions.
+
+type Subject {
+    id: #Symbol,
+    role: #Symbol,
+}
+
+type Resource {
+    type: #Symbol,
+    owner: #Symbol,
+}
+
+type Permission {
+    subject: #Symbol,
+    action: #Symbol,
+    resource: #Symbol,
+}
+
+type AuthorizationDecision {
+    allowed: #Symbol,
+    reason: #Symbol,
+}

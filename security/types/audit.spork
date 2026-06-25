@@ -1,0 +1,8 @@
+// Security — AuditLog type definition.
+
+type AuditLog {
+    event: #Symbol,
+    principal: #Symbol,
+    resource: #Symbol,
+    outcome: #Symbol,
+}

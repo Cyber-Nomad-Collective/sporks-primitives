@@ -1,0 +1,26 @@
+// Reactive — patterns.
+
+pattern cached_computed {
+    Computed
+    and (cached == "true")
+}
+
+pattern lazy_computed {
+    Computed
+    and (cached == "false")
+}
+
+pattern animation_frame_effect {
+    Effect
+    and (schedule == "animation_frame")
+}
+
+pattern buffered_stream {
+    Stream
+    and (buffer_size == "buffered")
+}
+
+pattern signal_stream {
+    Stream
+    and (source == "signal")
+}

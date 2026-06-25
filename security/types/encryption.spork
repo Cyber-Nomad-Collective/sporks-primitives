@@ -1,0 +1,8 @@
+// Security — EncryptionConfig type definition.
+
+type EncryptionConfig {
+    algorithm: #Symbol,
+    key_size: #Symbol,
+    mode: #Symbol,
+    provider: #Symbol,
+}

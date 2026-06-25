@@ -1,0 +1,49 @@
+// Parsers primitives — grammar, AST, and parser type definitions.
+
+type Grammar {
+    name: #Symbol,
+    language: #Symbol,
+    version: #Symbol,
+    node_count: #Symbol,
+}
+
+type ASTNode {
+    kind: #Symbol,
+    text: #Symbol,
+    start_byte: #Symbol,
+    end_byte: #Symbol,
+    children: #Symbol,
+}
+
+type ParseRule {
+    name: #Symbol,
+    node_kind: #Symbol,
+    target_kind: #Symbol,
+    provider: #Symbol,
+}
+
+type EmitRule {
+    name: #Symbol,
+    source_kind: #Symbol,
+    target_format: #Symbol,
+    provider: #Symbol,
+}
+
+type SyntaxTree {
+    root: #Symbol,
+    language: #Symbol,
+    error_count: #Symbol,
+}
+
+type Token {
+    kind: #Symbol,
+    text: #Symbol,
+    line: #Symbol,
+    column: #Symbol,
+}
+
+type Visitor {
+    name: #Symbol,
+    enter_kind: #Symbol,
+    leave_kind: #Symbol,
+}

@@ -1,0 +1,21 @@
+// Interfaces — patterns.
+
+pattern rest_api {
+    APIDef
+    and (protocol == "rest")
+}
+
+pattern graphql_api {
+    APIDef
+    and (protocol == "graphql")
+}
+
+pattern get_endpoint {
+    APIEndpoint
+    and (method == "GET")
+}
+
+pattern arm64_abi {
+    ABIDef
+    and (architecture == "arm64")
+}

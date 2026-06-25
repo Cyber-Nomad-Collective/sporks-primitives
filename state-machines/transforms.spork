@@ -1,0 +1,38 @@
+// State Machines primitives — states, transitions, events, guards, and actions transform rules.
+
+transform add_state(machine: #Symbol, state_name: #Symbol) {
+    for State {
+        match machine_id == $machine;
+        rewrite {
+            name: $state_name,
+        }
+    }
+}
+
+transform add_transition(from: #Symbol, to: #Symbol, event: #Symbol) {
+    for Transition {
+        match from_state == $from;
+        rewrite {
+            to_state: $to,
+            event: $event,
+        }
+    }
+}
+
+transform add_guard(transition: #Symbol, guard_name: #Symbol) {
+    for Guard {
+        match guard_id == $transition;
+        rewrite {
+            name: $guard_name,
+        }
+    }
+}
+
+transform change_initial_state(machine: #Symbol, new_initial: #Symbol) {
+    for StateMachine {
+        match machine_id == $machine;
+        rewrite {
+            initial_state: $new_initial,
+        }
+    }
+}

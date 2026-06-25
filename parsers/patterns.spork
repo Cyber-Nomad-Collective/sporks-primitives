@@ -1,0 +1,31 @@
+// Parsers primitives — grammar, AST, and parser pattern declarations.
+
+pattern tree_sitter_grammar {
+    Grammar
+    containing $node_count: #Symbol
+}
+
+pattern parse_rule_for_function {
+    ParseRule
+    and (node_kind == "function_item")
+}
+
+pattern emit_rule_for_type {
+    EmitRule
+    and (source_kind == "TypeDefinition")
+}
+
+pattern error_free_tree {
+    SyntaxTree
+    and (error_count == "0")
+}
+
+pattern identifier_token {
+    Token
+    and (kind == "identifier")
+}
+
+pattern visitor_enter {
+    Visitor
+    containing $enter_kind: #Symbol
+}

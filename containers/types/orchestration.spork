@@ -1,0 +1,21 @@
+// Containers — OrchestrationResource, ServiceMesh, DeploymentStrategy type definitions.
+
+type OrchestrationResource {
+    name: #Symbol,
+    kind: #Symbol,
+    namespace: #Symbol,
+    replicas: #Symbol,
+}
+
+type ServiceMesh {
+    name: #Symbol,
+    provider: #Symbol,
+    namespace: #Symbol,
+}
+
+type DeploymentStrategy {
+    name: #Symbol,
+    strategy_type: #Symbol,
+    max_surge: #Symbol,
+    max_unavailable: #Symbol,
+}

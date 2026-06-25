@@ -1,0 +1,23 @@
+// Documentation primitives — language-agnostic documentation type definitions.
+
+type DocBlock {
+    kind: #Symbol,
+    content: #Symbol,
+    target: #Symbol,
+}
+
+type DocSymbol {
+    name: #Symbol,
+    kind: #Symbol,
+    visibility: #Symbol,
+}
+
+type DocPage {
+    title: #Symbol,
+    path: #Symbol,
+}
+
+type DocConfig {
+    format: #Symbol,
+    output_path: #Symbol,
+}

@@ -1,0 +1,8 @@
+// Security — ComplianceRule type definition.
+
+type ComplianceRule {
+    name: #Symbol,
+    standard: #Symbol,
+    control: #Symbol,
+    status: #Symbol,
+}

@@ -1,0 +1,41 @@
+// Testing primitives — test framework, assertion, and coverage pattern declarations.
+
+pattern failing_test {
+    TestCase
+    and (status == "failed")
+}
+
+pattern passing_test {
+    TestCase
+    and (status == "passed")
+}
+
+pattern skipped_test {
+    TestCase
+    and (status == "skipped")
+}
+
+pattern jest_suite {
+    TestSuite
+    and (framework == "jest")
+}
+
+pattern vitest_suite {
+    TestSuite
+    and (framework == "vitest")
+}
+
+pattern equal_assertion {
+    Assertion
+    and (assert_type == "equal")
+}
+
+pattern mocked_function {
+    Mock
+    containing $target: #Symbol
+}
+
+pattern low_coverage {
+    CoverageReport
+    and (lines_pct == "low")
+}

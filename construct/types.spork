@@ -1,0 +1,27 @@
+// Construct primitives — schema validation and meta-type construction type definitions.
+
+type Schema {
+    name: #Symbol,
+    version: #Symbol,
+}
+
+type FieldDef {
+    name: #Symbol,
+    field_type: #Symbol,
+    required: #Symbol,
+}
+
+type Validator {
+    name: #Symbol,
+    target: #Symbol,
+}
+
+type ValidationResult {
+    valid: #Symbol,
+    error_path: #Symbol,
+}
+
+type MetaType {
+    schema: #Symbol,
+    original_type: #Symbol,
+}

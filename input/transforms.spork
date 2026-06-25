@@ -1,0 +1,28 @@
+// Input primitives — typed input generalization transform rules.
+
+transform make_required(input_name: #Symbol) {
+    for InputDef {
+        match name == $input_name;
+        rewrite {
+            required: "true",
+        }
+    }
+}
+
+transform change_input_type(input_name: #Symbol, new_type: #Symbol) {
+    for InputDef {
+        match name == $input_name;
+        rewrite {
+            input_type: $new_type,
+        }
+    }
+}
+
+transform change_group_layout(group_name: #Symbol, new_layout: #Symbol) {
+    for InputGroup {
+        match name == $group_name;
+        rewrite {
+            layout: $new_layout,
+        }
+    }
+}

@@ -1,0 +1,37 @@
+// Serialization primitives — serializers, deserializers, schemas, formats, and codecs transform rules.
+
+transform change_format(serializer: #Symbol, new_format: #Symbol) {
+    for Serializer {
+        match serializer_id == $serializer;
+        rewrite {
+            format: $new_format,
+        }
+    }
+}
+
+transform bump_schema_version(schema: #Symbol) {
+    for SchemaVersion {
+        match schema_id == $schema;
+        rewrite {
+            version: "incremented",
+        }
+    }
+}
+
+transform add_codec(name: #Symbol, format: #Symbol) {
+    for Codec {
+        match codec_id == $name;
+        rewrite {
+            wire_format: $format,
+        }
+    }
+}
+
+transform change_compatibility(check: #Symbol, strategy: #Symbol) {
+    for CompatibilityCheck {
+        match check_id == $check;
+        rewrite {
+            strategy: $strategy,
+        }
+    }
+}

@@ -1,0 +1,7 @@
+// Infra — Server type definition.
+
+type Server {
+    name: #Symbol,
+    provider: #Symbol,
+    region: #Symbol,
+}

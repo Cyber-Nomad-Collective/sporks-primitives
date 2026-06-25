@@ -1,0 +1,21 @@
+// Infra — patterns.
+
+pattern running_service {
+    Service
+    containing $runtime: #Symbol
+}
+
+pattern cloud_server {
+    Server
+    and (provider == "aws")
+}
+
+pattern container_with_restart {
+    Container
+    and (restart_policy == "always")
+}
+
+pattern private_network {
+    Network
+    and (network_type == "private")
+}

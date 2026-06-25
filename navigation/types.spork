@@ -1,0 +1,24 @@
+// Navigation primitives — navigation link and flow type definitions.
+
+type Link {
+    name: #Symbol,
+    target: #Symbol,
+    link_type: #Symbol,
+}
+
+type Flow {
+    name: #Symbol,
+    start: #Symbol,
+    completion: #Symbol,
+}
+
+type Route {
+    path: #Symbol,
+    component: #Symbol,
+    name: #Symbol,
+}
+
+type FlowStep {
+    endpoint: #Symbol,
+    transition: #Symbol,
+}

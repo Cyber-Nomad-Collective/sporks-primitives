@@ -1,0 +1,37 @@
+// Transport primitives — network protocol transform rules.
+
+transform change_reliability(protocol_name: #Symbol, new_reliability: #Symbol) {
+    for TransportProtocol {
+        match name == $protocol_name;
+        rewrite {
+            reliability: $new_reliability,
+        }
+    }
+}
+
+transform close_connection(conn_id: #Symbol) {
+    for Connection {
+        match id == $conn_id;
+        rewrite {
+            state: "closed",
+        }
+    }
+}
+
+transform change_port(addr_host: #Symbol, new_port: #Symbol) {
+    for SocketAddress {
+        match host == $addr_host;
+        rewrite {
+            port: $new_port,
+        }
+    }
+}
+
+transform change_packet_destination(packet_source: #Symbol, new_dest: #Symbol) {
+    for Packet {
+        match source == $packet_source;
+        rewrite {
+            destination: $new_dest,
+        }
+    }
+}

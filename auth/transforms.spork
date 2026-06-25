@@ -1,0 +1,19 @@
+// Auth primitives — language-agnostic authentication transform rules.
+
+transform rename_scheme(old: #Symbol, new: #Symbol) {
+    for AuthenticationScheme {
+        match name == $old;
+        rewrite {
+            name: $new,
+        }
+    }
+}
+
+transform change_token_type(target: #Symbol, new_type: #Symbol) {
+    for AuthenticationScheme {
+        match token_type == $target;
+        rewrite {
+            token_type: $new_type,
+        }
+    }
+}

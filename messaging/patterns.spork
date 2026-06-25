@@ -1,0 +1,31 @@
+// Messaging primitives — message brokers, queues, topics, and delivery semantics pattern declarations.
+
+pattern pub_sub_topic {
+    MessageTopic
+    and (partitions > "1")
+    containing $consumer_group: #Symbol
+}
+
+pattern point_to_point_queue {
+    MessageQueue
+    and (exclusive == "false")
+    containing $name: #Symbol
+}
+
+pattern dead_letter_queue {
+    DeadLetter
+    and (retry_count > "0")
+    containing $original_queue: #Symbol
+}
+
+pattern at_least_once {
+    MessageConsumer
+    and (ack_mode == "manual")
+    containing $prefetch_count: #Symbol
+}
+
+pattern exactly_once {
+    MessageProducer
+    and (idempotency_key != "null")
+    containing $producer_id: #Symbol
+}

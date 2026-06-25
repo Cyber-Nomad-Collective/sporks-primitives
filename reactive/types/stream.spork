@@ -1,0 +1,7 @@
+// Reactive — Stream type definition.
+
+type Stream {
+    name: #Symbol,
+    source: #Symbol,
+    buffer_size: #Symbol,
+}

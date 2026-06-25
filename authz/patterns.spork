@@ -1,0 +1,16 @@
+// Authorization primitives — language-agnostic access control pattern declarations.
+
+pattern permission_grant {
+    Permission
+    containing $action: #Symbol
+}
+
+pattern admin_permission {
+    Permission
+    and (action == "admin_*")
+}
+
+pattern owned_resource {
+    Resource
+    containing $owner: #Symbol
+}

@@ -1,0 +1,38 @@
+// Parsers primitives — grammar, AST, and parser transform rules.
+
+transform rename_grammar(old: #Symbol, new: #Symbol) {
+    for Grammar {
+        match name == $old;
+        rewrite {
+            name: $new,
+        }
+    }
+}
+
+transform change_parse_target(rule_name: #Symbol, new_target: #Symbol) {
+    for ParseRule {
+        match name == $rule_name;
+        rewrite {
+            target_kind: $new_target,
+        }
+    }
+}
+
+transform add_emit_rule(rule_name: #Symbol, source: #Symbol, format: #Symbol) {
+    for EmitRule {
+        match name == $rule_name;
+        rewrite {
+            source_kind: $source,
+            target_format: $format,
+        }
+    }
+}
+
+transform update_visitor_kind(visitor_name: #Symbol, new_kind: #Symbol) {
+    for Visitor {
+        match name == $visitor_name;
+        rewrite {
+            enter_kind: $new_kind,
+        }
+    }
+}

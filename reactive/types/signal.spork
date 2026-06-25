@@ -1,0 +1,7 @@
+// Reactive — Signal type definition.
+
+type Signal {
+    name: #Symbol,
+    signal_type: #Symbol,
+    initial_value: #Symbol,
+}

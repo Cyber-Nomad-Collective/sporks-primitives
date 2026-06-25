@@ -1,0 +1,46 @@
+// Containers — transforms.
+
+transform pin_image_digest(image_name: #Symbol, digest: #Symbol) {
+    for ContainerImage {
+        match name == $image_name;
+        rewrite {
+            digest: $digest,
+        }
+    }
+}
+
+transform bump_image_tag(image_name: #Symbol, new_tag: #Symbol) {
+    for ContainerImage {
+        match name == $image_name;
+        rewrite {
+            tag: $new_tag,
+        }
+    }
+}
+
+transform change_restart_policy(container_name: #Symbol, new_policy: #Symbol) {
+    for ContainerRun {
+        match name == $container_name;
+        rewrite {
+            restart_policy: $new_policy,
+        }
+    }
+}
+
+transform scale_replicas(resource_name: #Symbol, count: #Symbol) {
+    for OrchestrationResource {
+        match name == $resource_name;
+        rewrite {
+            replicas: $count,
+        }
+    }
+}
+
+transform migrate_volume_type(volume_name: #Symbol, new_type: #Symbol) {
+    for Volume {
+        match name == $volume_name;
+        rewrite {
+            volume_type: $new_type,
+        }
+    }
+}

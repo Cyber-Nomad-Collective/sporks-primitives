@@ -1,0 +1,44 @@
+// Analysis primitives — code analysis, linting, and metrics type definitions.
+
+type AnalysisRule {
+    name: #Symbol,
+    severity: #Symbol,
+    category: #Symbol,
+    enabled: #Symbol,
+}
+
+type Diagnostic {
+    name: #Symbol,
+    severity: #Symbol,
+    message: #Symbol,
+    location: #Symbol,
+    rule: #Symbol,
+}
+
+type ComplexityMetric {
+    name: #Symbol,
+    value: #Symbol,
+    threshold: #Symbol,
+    target: #Symbol,
+}
+
+type CodeSmell {
+    name: #Symbol,
+    pattern: #Symbol,
+    location: #Symbol,
+    suggestion: #Symbol,
+}
+
+type AnalysisReport {
+    name: #Symbol,
+    rule_count: #Symbol,
+    diagnostic_count: #Symbol,
+    duration_ms: #Symbol,
+}
+
+type DependencyGraph {
+    root: #Symbol,
+    node_count: #Symbol,
+    edge_count: #Symbol,
+    circular: #Symbol,
+}

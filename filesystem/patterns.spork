@@ -1,0 +1,16 @@
+// Filesystem primitives — declarative directory and file system structure pattern declarations.
+
+pattern directory_entry {
+    FSEntry
+    and (entry_type == "directory")
+}
+
+pattern file_entry {
+    FSEntry
+    and (entry_type == "file")
+}
+
+pattern templated_file {
+    FileDef
+    containing $template: #Symbol
+}

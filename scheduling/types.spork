@@ -1,0 +1,74 @@
+// Scheduling primitives — job scheduling, triggers, execution, and history type definitions.
+
+type ScheduledJob {
+    job_id: #Symbol,
+    name: #Symbol,
+    handler: #Symbol,
+    schedule: #Symbol,
+    enabled: #Symbol,
+    timeout: #Symbol,
+    max_retries: #Symbol,
+}
+
+type JobTrigger {
+    trigger_type: #Symbol,
+    expression: #Symbol,
+    timezone: #Symbol,
+    start_at: #Symbol,
+    end_at: #Symbol,
+    misfire_policy: #Symbol,
+}
+
+type JobSchedule {
+    schedule_id: #Symbol,
+    job_id: #Symbol,
+    next_run: #Symbol,
+    last_run: #Symbol,
+    status: #Symbol,
+    priority: #Symbol,
+}
+
+type JobExecution {
+    execution_id: #Symbol,
+    job_id: #Symbol,
+    started_at: #Symbol,
+    finished_at: #Symbol,
+    result: #Symbol,
+    error: #Symbol,
+    attempt: #Symbol,
+}
+
+type JobHistory {
+    job_id: #Symbol,
+    total_runs: #Symbol,
+    success_count: #Symbol,
+    failure_count: #Symbol,
+    avg_duration: #Symbol,
+    last_status: #Symbol,
+}
+
+type CronExpression {
+    expression: #Symbol,
+    seconds: #Symbol,
+    minutes: #Symbol,
+    hours: #Symbol,
+    day_of_month: #Symbol,
+    month: #Symbol,
+    day_of_week: #Symbol,
+}
+
+type JobDependency {
+    job_id: #Symbol,
+    depends_on: #Symbol,
+    condition: #Symbol,
+    cascade_failure: #Symbol,
+    timeout: #Symbol,
+}
+
+type JobLock {
+    lock_name: #Symbol,
+    owner: #Symbol,
+    acquired_at: #Symbol,
+    expires_at: #Symbol,
+    heartbeat: #Symbol,
+}
